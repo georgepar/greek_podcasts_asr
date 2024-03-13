@@ -65,50 +65,49 @@ Run
 
 ## Scripts for data preparation
 
-- Step 1: Get a random subset (50 hours) per domain
+#### Step 1: Get a random subset (50 hours) per domain
 
-      mkdir -p gpc-50; python scripts/sample.py --input_folder $(pwd)/gpc --output_folder $(pwd)/gpc-50 --hours 50
+    mkdir -p gpc-50; python scripts/sample.py --input_folder $(pwd)/gpc --output_folder $(pwd)/gpc-50 --hours 50
 
-- Step 2: Transcribe the podcasts
+#### Step 2: Transcribe the podcasts
 
-      bash scripts/transcribe.sh gpc-50
+    bash scripts/transcribe.sh gpc-50
 
-- Step 3: Create train-validation-test split
+#### Step 3: Create train-validation-test split
 
-      python scripts/train_dev_test_split.py --input_folder gpc-50 --output_folder gpc-50-all --dev_hours 0.3 --test_hours 1 --rename_sha --shuffle
+    python scripts/train_dev_test_split.py --input_folder gpc-50 --output_folder gpc-50-all --dev_hours 0.3 --test_hours 1 --rename_sha --shuffle
 
-- Step 4: Create subsets
+#### Step 4: Create subsets
 
-      mkdir gpc-50-all/gpc-20-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-20-train/ --hours 20
-      mkdir gpc-50-all/gpc-10-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-10-train/ --hours 10
-      mkdir gpc-50-all/gpc-5-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-5-train/ --hours 5
-      mkdir gpc-50-all/gpc-2-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-2-train/ --hours 2
+    mkdir gpc-50-all/gpc-20-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-20-train/ --hours 20
+    mkdir gpc-50-all/gpc-10-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-10-train/ --hours 10
+    mkdir gpc-50-all/gpc-5-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-5-train/ --hours 5
+    mkdir gpc-50-all/gpc-2-train; python scripts/get_subset.py --input_folder gpc-50-all/train --output_folder gpc-50-all/gpc-2-train/ --hours 2
 
-- Step 5: Convert to kaldi format
+#### Step 5: Convert to kaldi format
 
-      python scripts/to_kaldi.py gpc-50-all/train gpc-50-all/train_kaldi
-      python scripts/to_kaldi.py gpc-50-all/test gpc-50-all/test_kaldi
-      python scripts/to_kaldi.py gpc-50-all/dev gpc-50-all/dev_kaldi
-      python scripts/to_kaldi.py gpc-50-all/gpc-20-train gpc-50-all/gpc20_train_kaldi
-      python scripts/to_kaldi.py gpc-50-all/gpc-10-train gpc-50-all/gpc10_train_kaldi
-      python scripts/to_kaldi.py gpc-50-all/gpc-5-train gpc-50-all/gpc5_train_kaldi
-      python scripts/to_kaldi.py gpc-50-all/gpc-2-train gpc-50-all/gpc2_train_kaldi
+    python scripts/to_kaldi.py gpc-50-all/train gpc-50-all/train_kaldi
+    python scripts/to_kaldi.py gpc-50-all/test gpc-50-all/test_kaldi
+    python scripts/to_kaldi.py gpc-50-all/dev gpc-50-all/dev_kaldi
+    python scripts/to_kaldi.py gpc-50-all/gpc-20-train gpc-50-all/gpc20_train_kaldi
+    python scripts/to_kaldi.py gpc-50-all/gpc-10-train gpc-50-all/gpc10_train_kaldi
+    python scripts/to_kaldi.py gpc-50-all/gpc-5-train gpc-50-all/gpc5_train_kaldi
+    python scripts/to_kaldi.py gpc-50-all/gpc-2-train gpc-50-all/gpc2_train_kaldi
 
-- Step 6: Extract audio segments (Must have a valid Kaldi installation -> export
-  KALDI_PATH=/path/to/kaldi)
+#### Step 6: Extract audio segments (Must have a valid Kaldi installation -> `export KALDI_PATH=/path/to/kaldi`)
 
-      cd kaldi_utils
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/train_kaldi ../gpc-50-all/train_kaldi_segmented ../gpc-50-all/train_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/test_kaldi ../gpc-50-all/test_kaldi_segmented ../gpc-50-all/test_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/dev_kaldi ../gpc-50-all/dev_kaldi_segmented ../gpc-50-all/dev_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc20_train_kaldi ../gpc-50-all/gpc20_train_kaldi_segmented ../gpc-50-all/gpc20_train_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc10_train_kaldi ../gpc-50-all/gpc10_train_kaldi_segmented ../gpc-50-all/gpc10_train_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc5_train_kaldi ../gpc-50-all/gpc5_train_kaldi_segmented ../gpc-50-all/gpc5_train_segmented
-      bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc2_train_kaldi ../gpc-50-all/gpc2_train_kaldi_segmented ../gpc-50-all/gpc2_train_segmented
+    cd kaldi_utils
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/train_kaldi ../gpc-50-all/train_kaldi_segmented ../gpc-50-all/train_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/test_kaldi ../gpc-50-all/test_kaldi_segmented ../gpc-50-all/test_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/dev_kaldi ../gpc-50-all/dev_kaldi_segmented ../gpc-50-all/dev_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc20_train_kaldi ../gpc-50-all/gpc20_train_kaldi_segmented ../gpc-50-all/gpc20_train_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc10_train_kaldi ../gpc-50-all/gpc10_train_kaldi_segmented ../gpc-50-all/gpc10_train_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc5_train_kaldi ../gpc-50-all/gpc5_train_kaldi_segmented ../gpc-50-all/gpc5_train_segmented
+    bash extract_wav_segments_data_dir_eager.sh ../gpc-50-all/gpc2_train_kaldi ../gpc-50-all/gpc2_train_kaldi_segmented ../gpc-50-all/gpc2_train_segmented
 
-- Step 5: Convert to huggingface format
+#### Step 5: Convert to huggingface format
 
-      python scripts/hf_data_gen.py
+    python scripts/hf_data_gen.py
 
 ## Training the whisper models
 
@@ -123,24 +122,22 @@ Select the model, the subset and set the dataset path, and then run:
 
 ## Evaluating the models on the test sets
 
-- For common voice and fleurs
+#### For common voice and fleurs
 
-      export CHECKPOINT_STEPS=3000 # The latest checkpoint
-      cd training-scripts
-      python decode_whisper_cv.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key sentence --dataset mozilla-foundation/common_voice_11_0 --lang el
-      python decode_whisper_cv.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset google/fleurs --lang el
+    export CHECKPOINT_STEPS=3000 # The latest checkpoint
+    cd training-scripts
+    python decode_whisper_cv.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key sentence --dataset mozilla-foundation/common_voice_11_0 --lang el
+    python decode_whisper_cv.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset google/fleurs --lang el
 
-- For hparl and logotypografia (assuming you have downloaded and converted the
-  datasets to huggingface format in `./hparl-test-hf` and
-  `./logotypografia-test-hf`)
+#### For hparl and logotypografia (assuming you have downloaded and converted the datasets to huggingface format in `./hparl-test-hf` and `./logotypografia-test-hf`)
 
-      export CHECKPOINT_STEPS=3000 # The latest checkpoint
-      cd training-scripts
-      python decode_whisper_hplg.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ./hparl-test-hf --lang el
-      python decode_whisper_hplg.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ./logotypografia-test-hf --lang el
+    export CHECKPOINT_STEPS=3000 # The latest checkpoint
+    cd training-scripts
+    python decode_whisper_hplg.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ./hparl-test-hf --lang el
+    python decode_whisper_hplg.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ./logotypografia-test-hf --lang el
 
-- For the greek podcast dataset
+#### For the greek podcast dataset
 
-      export CHECKPOINT_STEPS=3000 # The latest checkpoint
-      cd training-scripts
-      python decode_whisper_podcast.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ../greek_podcast_dataset/test --lang el
+    export CHECKPOINT_STEPS=3000 # The latest checkpoint
+    cd training-scripts
+    python decode_whisper_podcast.py --processor ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf --model ./whisper-${MODEL}-el-${TRAINING_SUBSET}-hf/checkpoint-${CHECKPOINT_STEPS} --text-key transcription --dataset ../greek_podcast_dataset/test --lang el
