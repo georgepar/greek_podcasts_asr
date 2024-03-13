@@ -1,0 +1,10 @@
+#https://feeds.buzzsprout.com/1921690.rss
+#https://anchor.fm/s/8c5cef4/podcast/rss
+#https://anchor.fm/s/21c82820/podcast/rss
+#https://anchor.fm/s/f421e68/podcast/rss
+https://anchor.fm/s/85be48c8/podcast/rss
+https://anchor.fm/s/37a61670/podcast/rss
+https://feeds.simplecast.com/jWxrUFx5
+https://www.halftone.fm/feed/podcast/monokeroi-se-bar-podcast/
+https://www.halftone.fm/feed/podcast/vertical-slice-podcast/
+https://feeds.simplecast.com/hXgppmxg

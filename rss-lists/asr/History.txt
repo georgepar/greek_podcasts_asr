@@ -1,0 +1,13 @@
+#https://feeds.castos.com/41k2w
+#https://media.rss.com/omilies/feed.xml
+#https://anchor.fm/s/4d4b0364/podcast/rss
+#https://anchor.fm/s/a3efcb14/podcast/rss
+#https://rss.dw.com/xml/podcast_gri_kultur
+#https://feeds.soundcloud.com/users/soundcloud:users:121135502/sounds.rss
+https://feeds.redcircle.com/fddc6d23-7328-406e-ac1e-461225fd89fc
+https://feeds.simplecast.com/G0uJ4AoW
+https://feeds.simplecast.com/zwc2Ldir
+https://feeds.simplecast.com/UOcuo4H5
+https://feeds.buzzsprout.com/1126214.rss
+https://feeds.simplecast.com/IUWfBXjd
+https://feeds.simplecast.com/i9yQ_6Og

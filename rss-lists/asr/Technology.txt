@@ -1,0 +1,8 @@
+#https://anchor.fm/s/10c53d88/podcast/rss
+#https://feeds.simplecast.com/F6qF2NCi
+#https://feeds.simplecast.com/Wnmr9Pbp
+#https://anchor.fm/s/4a286b54/podcast/rss
+https://feeds.soundcloud.com/users/soundcloud:users:913717711/sounds.rss
+https://anchor.fm/s/d6dc9e08/podcast/rss
+https://feeds.transistor.fm/plasmata-ii-ioannina
+https://anchor.fm/s/ccc0c5c/podcast/rss
